@@ -69,6 +69,44 @@ void menara()
     glPopMatrix();
 }
 
+void pohon()
+{
+    //Batang Cemara
+    glPushMatrix();
+glColor3f(0.8f, 0.4f, 0.1f);
+    glScaled(1.1,7,1);
+    glutSolidCube(0.5f);
+    glPopMatrix();
+
+    //Daun Bawah
+    glPushMatrix();
+    glColor3f(0.5f, 0.7f, 0.1f);
+    glTranslatef(0.0f, 1.5f, 0.0f);
+    glRotatef(230, 1.5, 2, 2);
+glScaled(2,2,3);
+glutSolidCone(1.6,1,20,30);
+glPopMatrix();
+
+    //Daun Tengah
+    glPushMatrix();
+    glColor3f(0.5f, 0.7f, 0.1f);
+    glTranslatef(0.0f, 3.0f, 0.0f);
+    glRotatef(230, 1.5, 2, 2);
+glScaled(2,2,3);
+glutSolidCone(1.3,1,20,30);
+glPopMatrix();
+
+//Daun Atas
+    glPushMatrix();
+    glColor3f(0.5f, 0.7f, 0.1f);
+    glTranslatef(0.0f, 4.5f, 0.0f);
+    glRotatef(230, 1.5, 2, 2);
+glScaled(2,2,3);
+glutSolidCone(1.0,1,20,30);
+glPopMatrix();
+
+}
+
 void reshape(int w, int h)
 {
     glViewport(0,0,(GLsizei) w,(GLsizei) h);
