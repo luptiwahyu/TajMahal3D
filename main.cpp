@@ -69,6 +69,32 @@ void menara()
     glPopMatrix();
 }
 
+void lantai(){
+
+    glPushMatrix();
+            glScalef(5.0,-0.25,5.0);
+            glutSolidCube(2);
+    glPopMatrix();
+}
+
+void tanggadepan(){
+    //tangga depan dan belakang
+    glPushMatrix();
+            glScalef(1.0,-0.25,0.5);
+            glutSolidCube(2);
+    glPopMatrix();
+
+    }
+
+void tanggasamping(){
+    //tangga kanan dan kiri
+    glPushMatrix();
+            glScalef(0.7,-0.25,1.0);
+            glutSolidCube(2);
+    glPopMatrix();
+
+    }
+
 void reshape(int w, int h)
 {
     glViewport(0,0,(GLsizei) w,(GLsizei) h);
@@ -86,6 +112,35 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glLoadIdentity();
     menara();
+    
+    lantai();
+
+	    //tangga depan
+    glPushMatrix();
+        glTranslatef(0.0,0.0,5.5);
+        tanggadepan();
+    glPopMatrix();
+
+    //tangga belakang
+    glPushMatrix();
+        glTranslatef(0.0,0.0,-5.5);
+        tanggadepan();
+    glPopMatrix();
+
+    //tangga kanan
+	glPushMatrix();
+        glTranslatef(5.4,0.0,0.0);
+       // glRotated(45,1.0,1.0,1.0);
+        tanggasamping();
+	glPopMatrix();
+
+    //tangga kiri
+    glPushMatrix();
+        glTranslatef(-5.4,0.0,0.0);
+        tanggasamping();
+    glPopMatrix();
+
+
     glutSwapBuffers();
 }
 
