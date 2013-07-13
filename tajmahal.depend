@@ -226,3 +226,49 @@
 
 1366777176 c:\users\kid\documents\github\tajmahal\color.h
 
+1373721554 source:c:\users\kid\documents\github\taj-mahal-3d\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<OpenGL/OpenGL.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<GL/glu.h>
+	<GL/gl.h>
+	"imageloader.h"
+	"vec3f.h"
+	"color.h"
+
+1341010376 c:\program files (x86)\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341010380 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341010374 c:\program files (x86)\codeblocks\mingw\include\math.h
+	<_mingw.h>
+
+1370951732 c:\users\kid\documents\github\taj-mahal-3d\imageloader.h
+
+1370951732 c:\users\kid\documents\github\taj-mahal-3d\vec3f.h
+	<iostream>
+
+1373721554 c:\users\kid\documents\github\taj-mahal-3d\color.h
+
+1370951732 source:c:\users\kid\documents\github\taj-mahal-3d\imageloader.cpp
+	<assert.h>
+	<fstream>
+	"imageloader.h"
+
+1341010370 c:\program files (x86)\codeblocks\mingw\include\assert.h
+	<_mingw.h>
+
+1370951732 source:c:\users\kid\documents\github\taj-mahal-3d\vec3f.cpp
+	<math.h>
+	"vec3f.h"
+
