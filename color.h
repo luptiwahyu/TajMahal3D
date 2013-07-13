@@ -7,6 +7,8 @@
 #define White 1.0,1.0,1.0
 #define Black 0.0,0.0,0.0
 
+#define GoldPole 0.627451,0.627451,0
+
 #define DimGray 0.329412,0.329412,0.329412
 #define Gray 0.752941,0.752941,0.752941
 #define LightGray 0.658824,0.658824,0.658824
