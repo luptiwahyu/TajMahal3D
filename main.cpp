@@ -29,7 +29,7 @@ float rot = 0;
 
 float xk, xl, zl;
 GLUquadricObj *quad = gluNewQuadric();
-GLuint texture[2];
+GLuint texture[3];
 
 //train 2D
 //class untuk terain 2D
@@ -1233,6 +1233,7 @@ struct Gambar {
 	unsigned long sizeY;
 	char *data;
 };
+
 typedef struct Gambar Gambar; //struktur data untuk
 
 //mengambil gambar BMP
@@ -1521,7 +1522,7 @@ void init(void) {
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, gambar1->sizeX, gambar1->sizeY, 0, GL_RGB,
 			GL_UNSIGNED_BYTE, gambar1->data);
 
-	//tekstur air
+	//------------------------tekstur air-----------------------------//
 
 	//binding texture untuk membuat texture 2D
 	glBindTexture(GL_TEXTURE_2D, texture[2]);
@@ -1532,8 +1533,6 @@ void init(void) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //
 
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, gambar2->sizeX, gambar2->sizeY, 0, GL_RGB,GL_UNSIGNED_BYTE, gambar2->data);
-
-
 }
 
 static void kibor(int key, int x, int y) {
@@ -1621,7 +1620,7 @@ int main(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL | GLUT_DEPTH); //add a stencil buffer to the window
 	glutInitWindowSize(800, 600);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Sample Terain");
+	glutCreateWindow("Taj Mahal");
 	init();
 
 	glutDisplayFunc(display);
