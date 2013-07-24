@@ -31,8 +31,21 @@ float xk, xl, zl;
 GLUquadricObj *quad = gluNewQuadric();
 GLuint texture[3];
 
-//train 2D
-//class untuk terain 2D
+//-----------------------var objek orang----------------------//
+bool* keyStates = new bool[256]; // Create an array of boolean values of length 256 (0-255)
+
+bool movingUp = false;
+float yLocation = 0.0f;
+
+float yRotationAngle = 0.0f;
+
+void keyOperations (void) {
+    if (keyStates[GLUT_KEY_LEFT]) {
+    }
+}
+//-----------------------end of var objek orang----------------------//
+
+
 class Terrain {
 private:
 	int w; //Width
@@ -214,7 +227,7 @@ Terrain* loadTerrain(const char* filename, float height) {
 }
 
 float _angle = 60.0f;
-//buat tipe data terain
+
 Terrain* _terrain;
 Terrain* _terrainTanah;
 Terrain* _terrainKolam;
@@ -239,22 +252,7 @@ void cleanup() {
 
 //untuk di display
 void drawSceneTanah(Terrain *terrain, GLfloat r, GLfloat g, GLfloat b) {
-	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	/*
-	 glMatrixMode(GL_MODELVIEW);
-	 glLoadIdentity();
-	 glTranslatef(0.0f, 0.0f, -10.0f);
-	 glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
-	 glRotatef(-_angle, 0.0f, 1.0f, 0.0f);
 
-	 GLfloat ambientColor[] = {0.4f, 0.4f, 0.4f, 1.0f};
-	 glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-
-	 GLfloat lightColor0[] = {0.6f, 0.6f, 0.6f, 1.0f};
-	 GLfloat lightPos0[] = {-0.5f, 0.8f, 0.1f, 0.0f};
-	 glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
-	 glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
-	 */
 	float scale = 400.0f / max(terrain->width() - 1, terrain->length() - 1);
 	glScalef(scale, scale, scale);
 	glTranslatef(-(float) (terrain->width() - 1) / 2, 0.0f,
@@ -279,7 +277,7 @@ void drawSceneTanah(Terrain *terrain, GLfloat r, GLfloat g, GLfloat b) {
 
 unsigned int LoadTextureFromBmpFile(char *filename);
 
-/* segidelapan bagian tengah */
+//-------------------- segidelapan bagian tengah -------------------------//
 void kubusbesarinti()
 {
     glPushMatrix();
@@ -374,7 +372,9 @@ void sudutbangunanintifix()
     glPopMatrix();
 }
 
-// bangunan tengah inti segidelapan
+//-------------------- end of segidelapan bagian tengah -------------------------//
+
+//-------------------- bangunan tengah inti segidelapan -------------------------//
 void bangunandasarintifix()
 {
     glPushMatrix();
@@ -385,7 +385,7 @@ void bangunandasarintifix()
     glPopMatrix();
 }
 
-/* pintu */
+//---------------------- pintu -----------------------//
 void circle()
 {
     //filled circle
@@ -629,7 +629,9 @@ void pintubesarkecilfix()
     glPopMatrix();
 }
 
-/* kubah besar */
+//---------------------- end of pintu -----------------------//
+
+//---------------------- kubah ----------------------//
 void kubahbesar()
 {
     // menara atas
@@ -716,7 +718,7 @@ void kubahbesarfix()
     glPopMatrix();
 }
 
-/* kubah kecil */
+//-------------------- kubah kecil -----------------//
 void kubahkecilfix()
 {
     // menara atas
@@ -896,7 +898,9 @@ void kubahkecilfix()
     glPopMatrix();
 }
 
-/* lantai */
+//---------------------- end of kubah ----------------------//
+
+//----------------------- lantai -----------------------//
 void lantai()
 {
     glPushMatrix();
@@ -920,28 +924,6 @@ void tanggasamping()
     glPushMatrix();
             glScalef(0.7,-0.25,1.0);
             glutSolidCube(2);
-    glPopMatrix();
-}
-
-void lantaibulat()
-{
-    glColor3f(White);
-    glPushMatrix();
-        glTranslated(0.0,-1.0,1.0);
-        glRotated(90,-1.0,0.0,0.0);
-        gluCylinder(quad,0.8,0.8,0.5,8,1);
-    glPopMatrix();
-
-    glPushMatrix();
-        glTranslated(0.0,-0.5,1.0);
-        glRotated(90,-1.0,0.0,0.0);
-        gluDisk(quad,0.0,0.8,8,1);
-    glPopMatrix();
-
-    glPushMatrix();
-        glTranslated(0.0,-1.0,1.0);
-        glRotated(270,-1.0,0.0,0.0);
-        gluDisk(quad,0.0,0.8,8,1);
     glPopMatrix();
 }
 
@@ -972,6 +954,31 @@ void lantaifix()
     glPushMatrix();
         glTranslatef(-5.4,0.0,0.0);
         tanggasamping();
+    glPopMatrix();
+}
+
+//----------------------- end of lantai -----------------------//
+
+//--------------------- menara -----------------------//
+void lantaibulat()
+{
+    glColor3f(White);
+    glPushMatrix();
+        glTranslated(0.0,-1.0,1.0);
+        glRotated(90,-1.0,0.0,0.0);
+        gluCylinder(quad,0.8,0.8,0.5,8,1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(0.0,-0.5,1.0);
+        glRotated(90,-1.0,0.0,0.0);
+        gluDisk(quad,0.0,0.8,8,1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(0.0,-1.0,1.0);
+        glRotated(270,-1.0,0.0,0.0);
+        gluDisk(quad,0.0,0.8,8,1);
     glPopMatrix();
 }
 
@@ -1070,7 +1077,9 @@ void menarafix()
         lantaibulat();
     glPopMatrix();
 }
+//--------------------- end of menara -----------------------//
 
+//--------------------- taj mahal -------------------//
 void tajmahal()
 {
     bangunandasarintifix();
@@ -1157,7 +1166,9 @@ void tajmahal()
         glPopMatrix();
     }
 }
+//--------------------- end of taj mahal -------------------//}
 
+//------------------ pohon ----------------//
 void pohon(){
     glPushMatrix();
         glColor3f(Green);
@@ -1185,7 +1196,9 @@ void pohon(){
 
     glPopMatrix();
 }
+//------------------ end of pohon ----------------//
 
+//-------------------- awan -----------------//
 void awan(void)
 {
     glPushMatrix();
@@ -1210,7 +1223,9 @@ void awan(void)
         glutSolidSphere(7, 50, 50);
     glPopMatrix();
 }
+//-------------------- end of awan -----------------//
 
+//------------------ kolam ------------------//
 void dasar()
 {
     glColor3f(White);
@@ -1227,14 +1242,231 @@ void dasar()
         glEnd();
     glPopMatrix();
 }
+//------------------ end of kolam ------------------//
 
+//---------------------- orang ---------------------------//
+void kepala()
+{
+    glPushMatrix();
+        glColor3d(White);
+        glTranslated(0,3.41,0);
+        glScaled(1,1,1);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(0,3,0.55);
+        glScaled(1,0.1,1);
+        square();
+    glPopMatrix();
+}
+
+void topi()
+{
+    glPushMatrix();
+        //glColor3d(Red);
+        glTranslated(0,3.75,0);
+        glScaled(1,0.4,1);
+        glutSolidCube(1.05);
+    glPopMatrix();
+
+    glPushMatrix();
+        //glColor3d(Red);
+        glTranslated(0,3.6,0.25);
+        glScaled(1,0.1,1);
+        glutSolidCube(1.05);
+    glPopMatrix();
+}
+
+void kepaladantopi()
+{
+    glPushMatrix();
+        glRotated(yRotationAngle,0,1,0);
+        kepala();
+        topi();
+
+        if (movingUp)
+            yRotationAngle += 5.0f;
+        else
+            yRotationAngle -= 5.0f;
+
+        if (yRotationAngle > 60.0f)
+            movingUp = false;
+        else if (yRotationAngle < -60.0f)
+            movingUp = true;
+
+    glPopMatrix();
+}
+
+void badan()
+{
+    glPushMatrix();
+        glColor3f(SummerSky);
+        glTranslated(0,2.02,0);
+        glScaled(1.4,1.8,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+}
+
+void lengandiam()
+{
+    //----------------lengan kiri-----------------//
+    glPushMatrix();
+        glColor3d(SummerSky);
+        glTranslated(-1,2.62,0);
+        glScaled(0.6,0.6,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glColor3d(White);
+        glTranslated(-1,1.62,0);
+        glScaled(0.6,1.4,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+    //----------------end of lengan kiri-----------------//
+
+    //----------------lengan kanan-----------------//
+    glPushMatrix();
+        glColor3d(SummerSky);
+        glTranslated(1,2.62,0);
+        glScaled(0.6,0.6,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glColor3d(White);
+        glTranslated(1,1.62,0);
+        glScaled(0.6,1.4,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+    //----------------end of lengan kanan-----------------//
+}
+
+void lengangerak()
+{
+    //----------------lengan kiri-----------------//
+    glPushMatrix();
+        glTranslatef(0,2.6,0);
+        glRotatef(180,1,0,0);
+        glRotatef(yRotationAngle,1,0,0);
+        glPushMatrix();
+            glColor3d(SummerSky);
+            glTranslated(-1,0,0);
+            glScaled(0.6,0.6,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+        glPushMatrix();
+            glColor3d(White);
+            glTranslated(-1,1,0);
+            glScaled(0.6,1.4,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+
+        if (movingUp)
+            yRotationAngle += 1.0f;
+        else
+            yRotationAngle -= 1.0f;
+
+        if (yRotationAngle > 10.0f)
+            movingUp = false;
+        else if (yRotationAngle < -40.0f)
+            movingUp = true;
+
+    glPopMatrix();
+    //----------------end of lengan kiri-----------------//
+
+    //----------------lengan kanan-----------------//
+    glPushMatrix();
+        glPushMatrix();
+            glColor3d(SummerSky);
+            glTranslated(1,2.62,0);
+            glScaled(0.6,0.6,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3d(White);
+            glTranslated(1,1.62,0);
+            glScaled(0.6,1.4,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+    glPopMatrix();
+    //----------------end of lengan kanan-----------------//
+}
+
+void kaki()
+{
+    glPushMatrix();
+        glColor3d(Black);
+        glTranslated(0,0.87,0);
+        glScaled(1.4,0.5,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    //----------------kaki kiri-----------------//
+    glPushMatrix();
+        glColor3d(Black);
+        glTranslated(-0.37,-0.1,0);
+        glScaled(0.67,1.5,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glColor3d(Brown);
+        glTranslated(-0.37,-1.05,0);
+        glScaled(0.67,0.4,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+    //----------------end of kaki kiri-----------------//
+
+
+    //----------------kaki kanan-----------------//
+    glPushMatrix();
+        glColor3d(Black);
+        glTranslated(0.37,-0.1,0);
+        glScaled(0.67,1.5,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+        glColor3d(Brown);
+        glTranslated(0.37,-1.05,0);
+        glScaled(0.67,0.4,0.6);
+        glutSolidCube(1);
+    glPopMatrix();
+    //----------------end of kaki kanan-----------------//
+}
+
+void orangfix1()
+{
+    kepaladantopi();
+    badan();
+    lengandiam();
+    kaki();
+}
+
+void orangfix2()
+{
+    kepala();
+    glPushMatrix();
+        glColor3f(Red);
+        topi();
+    glPopMatrix();
+    badan();
+    lengangerak();
+    kaki();
+}
+//------------------- end of orang -------------------------//
+
+//------------------- texture -----------------//
 struct Gambar {
 	unsigned long sizeX;
 	unsigned long sizeY;
 	char *data;
 };
 
-typedef struct Gambar Gambar; //struktur data untuk
+typedef struct Gambar Gambar;
 
 //mengambil gambar BMP
 int GambarLoad(char *filename, Gambar *gambar) {
@@ -1341,11 +1573,10 @@ Gambar * loadTextureDua() {
 }
 
 void display(void) {
-
-	glClearStencil(0); //clear the stencil buffer
+	glClearStencil(0);
 	glClearDepth(1.0f);
 	glClearColor(0.0, 0.6, 0.8, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); //clear the buffers
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glLoadIdentity();
 	gluLookAt(viewx, viewy, viewz, 0.0, 0.0, 5.0, 0.0, 1.0, 0.0);
 
@@ -1353,19 +1584,16 @@ void display(void) {
 
 	glPushMatrix();
 
-	//glBindTexture(GL_TEXTURE_3D, texture[0]);
 	drawSceneTanah(_terrain, 0.3f, 0.9f, 0.0f);
 	glPopMatrix();
 
 	glPushMatrix();
 
-	//glBindTexture(GL_TEXTURE_3D, texture[0]);
 	drawSceneTanah(_terrainTanah, 205.0f/255, 120.0f/255, 63.0f/255);
 	glPopMatrix();
 
 	glPushMatrix();
 
-	//glBindTexture(GL_TEXTURE_3D, texture[0]);
 	drawSceneTanah(_terrainKolam, 0.0f, 0.2f, 0.5f);
 	glPopMatrix();
 
@@ -1380,35 +1608,39 @@ void display(void) {
     {
         glPushMatrix();
             glEnable(GL_TEXTURE_2D);
-            //glEnable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-            //glEnable(GL_TEXTURE_GEN_T);
             glBindTexture(GL_TEXTURE_2D, texture[0]);
             gluQuadricTexture(quad,1);
             glScaled(4,4,4);
             glTranslated(xp,4.3,5);
             pohon();
-            //glDisable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-            //glDisable(GL_TEXTURE_GEN_T);
             glDisable(GL_TEXTURE_2D);
         glPopMatrix();
 
         glPushMatrix();
             glEnable(GL_TEXTURE_2D);
-            //glEnable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-            //glEnable(GL_TEXTURE_GEN_T);
             glBindTexture(GL_TEXTURE_2D, texture[0]);
-            //gluQuadricTexture(quad,1);
             glScaled(4,4,4);
             glTranslated(xp,4.3,-5);
             pohon();
-            //glDisable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-            //glDisable(GL_TEXTURE_GEN_T);
             glDisable(GL_TEXTURE_2D);
         glPopMatrix();
     }
 
-    //awan
     glPushMatrix();
+        glPushMatrix();
+            glColor3d(Aquamarine);
+            glTranslated(1,2.62,0);
+            glScaled(0.6,0.6,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3d(White);
+            glTranslated(1,1.62,0);
+            glScaled(0.6,1.4,0.6);
+            glutSolidCube(1);
+        glPopMatrix();
+
         glTranslatef(-250, 100, -230);
         glScalef(1.8, 1.0, 1.0);
         glRotated(65,1,3,1);
@@ -1448,31 +1680,37 @@ void display(void) {
     {
         glPushMatrix();
         glEnable(GL_TEXTURE_2D);
-        //glEnable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-        //glEnable(GL_TEXTURE_GEN_T);
         glBindTexture(GL_TEXTURE_2D, texture[2]);
         glTranslatef(xw,12.8,-31.3);
         glRotated(90,1,0,0);
         glScaled(1.8,2.05,1.8);
         dasar();
-        //glDisable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-        //glDisable(GL_TEXTURE_GEN_T);
         glDisable(GL_TEXTURE_2D);
         glPopMatrix();
     }
 
     glPushMatrix();
         glEnable(GL_TEXTURE_2D);
-        //glEnable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-        //glEnable(GL_TEXTURE_GEN_T);
         glBindTexture(GL_TEXTURE_2D, texture[2]);
         glTranslatef(182,12.8,-31.3);
         glRotated(90,1,0,0);
         glScaled(1.8,2.05,1.8);
         dasar();
-        //glDisable(GL_TEXTURE_GEN_S); //enable texture coordinate generation
-        //glDisable(GL_TEXTURE_GEN_T);
         glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(169,14,-20);
+        glScaled(1,1,1);
+        glRotated(40,0,1,0);
+        orangfix1();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(171,14,-15);
+        glScaled(1,1,1);
+        glRotated(190,0,1,0);
+        orangfix2();
     glPopMatrix();
 
 	glutSwapBuffers();
@@ -1508,7 +1746,7 @@ void init(void) {
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	// Generate texture/ membuat texture
+	// Generate texture membuat texture
 	glGenTextures(2, texture);
 
 	//binding texture untuk membuat texture 2D
@@ -1537,18 +1775,10 @@ void init(void) {
 
 static void kibor(int key, int x, int y) {
 	switch (key) {
-	/*
-	case GLUT_KEY_HOME: //up
-		viewy++;
-		break;
-	case GLUT_KEY_END: //down
-		viewy--;
-		break;
-	*/
-	case GLUT_KEY_UP: //end
+	case GLUT_KEY_UP:
 		viewx-=2;
 		break;
-	case GLUT_KEY_DOWN: //home
+	case GLUT_KEY_DOWN:
 		viewx+=2;
 		break;
 	case GLUT_KEY_RIGHT:
@@ -1602,7 +1832,7 @@ void keyboard(unsigned char key, int x, int y) {
 		viewy+=2;
 	}
 	if (key == 27) {
-        exit(1);  // Escape key
+        exit(1);  // Esc key
 	}
 
 }
@@ -1617,9 +1847,9 @@ void reshape(int w, int h) {
 
 int main(int argc, char **argv) {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL | GLUT_DEPTH); //add a stencil buffer to the window
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
-	glutInitWindowPosition(100, 100);
+	glutInitWindowPosition(50, 20);
 	glutCreateWindow("Taj Mahal");
 	init();
 
